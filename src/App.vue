@@ -1,8 +1,15 @@
 <script setup>
 import { ref } from 'vue'
+import { useSubmit } from './composables/useSubmit'
 
 const identifiant = ref()
-const password = ref()
+const motdepasse = ref()
+
+const { submit } = useSubmit()
+
+const handleSubmit = () => {
+  submit({ id: identifiant.value, pwd: motdepasse.value })
+}
 </script>
 
 <template>
@@ -14,9 +21,9 @@ const password = ref()
 
     <div class="form-control">
       <label for="pwd" class="label">Mot de passe</label>
-      <input type="password" v-model="password" class="input input-bordered" name="pwd" id="" />
+      <input type="password" v-model="motdepasse" class="input input-bordered" name="pwd" id="" />
     </div>
 
-    <button type="button" class="btn btn-primary mt-4">Se connecter</button>
+    <button type="button" @click="handleSubmit" class="btn btn-primary mt-4">Se connecter</button>
   </form>
 </template>
